@@ -1,3 +1,9 @@
+''' Problem statement: 
+implement a simple online course management system. It defines Course, Instructor, and Student classes that allow students to enroll or drop courses, instructors to add assignments, and courses to manage capacity and enrolled students.
+'''
+
+
+
 ''' course class '''
 
 class Course
