@@ -1,6 +1,6 @@
 # Topics: Ranges, predicate methods, conditional return
 
-# this code checks if a person is a child, teenager, or adult using ranges and give discount i subscription and retur a bolean value
+# this code checks if a person is a child, teenager, or adult using ranges and give discount i subscription
 
 def age_discount(age)
   case age
