@@ -2,7 +2,7 @@
 class Movie
   attr_accessor :title, :type
 
-  def initialize(title, type)   # fixed typo here
+  def initialize(title, type)  
     @title = title
     @type = type
   end
@@ -18,21 +18,21 @@ end
 class Theatre
   attr_accessor :name, :movies, :bookings
 
-  def initialize(name)           # fixed typo here
+  def initialize(name)          
     @name = name
-    @movies = []
-    @bookings = Hash.new { |h, k| h[k] = [] } # store showtime => seats
+    @movies = []          #array of hash objects
+    @bookings = Hash.new { |h, k| h[k] = [] } # store showtime(key) => seats(value)
   end
 
-  def add_movie(movie, showtime) # changed to add_movie
+  def add_movie(movie, showtime)
     @movies << { movie: movie, showtime: showtime }
   end
 
   def available_seats(showtime)
     all_seats = (1..10).to_a
-    booked = @bookings[showtime]
+    booked = @bookings[showtime]            #return array of booked seats 
     available = all_seats - booked
-    available.slice(0, 7) # show first 7 available seats
+    available.slice(0, 7)                   # show first 7 available seats
   end
 end
 
@@ -40,7 +40,7 @@ end
 class Booking
   attr_accessor :theatre, :username
 
-  def initialize(theatre, username) # fixed typo here
+  def initialize(theatre, username)
     @theatre = theatre
     @username = username
   end
@@ -83,7 +83,7 @@ action_movies.call(t.movies).each { |m| puts m[:movie] }
 b = Booking.new(t, "Alice")
 
 # book tickets with discount
-b.book_ticket("10AM", 3) { |price| price * 0.8 }  # 20% discount
+b.book_ticket("10AM", 3) { |price| price * 0.8 } 
 
 # try booking the same seat again
 b.book_ticket("10AM", 3)
@@ -94,7 +94,10 @@ puts "Available seats for 10AM: #{t.available_seats("10AM").inspect}"
 b.cancel_ticket("10AM", 3)
 
 puts "All showtimes:"
-showtime_enum = t.movies.each
-3.times { puts showtime_enum.next[:showtime] rescue nil }
+t.movies.each do |m|
+  puts m[:showtime]
+end
 
-t.movies.tap { |m| puts "DEBUG: All movies in theatre: #{m.map { |x| x[:movie].title }}" }
+titles = t.movies.map { |x| x[:movie].title }
+puts "All movies in theatre: #{titles}"
+
